@@ -1,0 +1,10 @@
+github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b h1:L/QXpzIa3pOvUGt1D1lA5KjYhPBAN/3iWdP7xeFS9F0=
+github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b/go.mod h1:H0wQNHz2YrLsuXOZozoeDmnHXkNCRmMW0gwFWDfEZDA=
+github.com/dgryski/go-ketama v0.0.0-20200414202721-8c956565334c h1:wnoBQMjyO8phIZZDrH7q4kLx7EvifefsEixUvEdwLYE=
+github.com/dgryski/go-ketama v0.0.0-20200414202721-8c956565334c/go.mod h1:1l8nyuuuoKmkJikYwk1gk0kmBigkDZ2yFQHgSGdVQoI=
+github.com/liyinhgqw/memcache_client v0.0.0-20140508144559-92b1056af04c h1:3r1VqqUvtsZpxbv7KS7lDoiN9Us6lZczQmG0zIjXKnQ=
+github.com/liyinhgqw/memcache_client v0.0.0-20140508144559-92b1056af04c/go.mod h1:LxFz19l5IhOi5bM9DZbUd9lZhpKrMCroxwE77JgL9Eg=
+github.com/ngerakines/ketama v0.0.0-20140501192540-cd07782dc577 h1:CG3k2wgEosj8YndSAoH4Bx8iAQt9KcRakUqoqjZ7hUQ=
+github.com/ngerakines/ketama v0.0.0-20140501192540-cd07782dc577/go.mod h1:BvhSyvtuNZv6qStYBUP6yVbeSAExmpytVpXpNMLxAzc=
+github.com/rckclmbr/goketama v0.0.0-20181103001945-ac3ec91389c8 h1:cdqAI4nMyogkHOpUo+T/Gowz+B+20R9W/yzhKTFVp9Y=
+github.com/rckclmbr/goketama v0.0.0-20181103001945-ac3ec91389c8/go.mod h1:36E0jqCK+H1LXGERfZkLAymw60mJiZoK3nbSFpzgKPo=
