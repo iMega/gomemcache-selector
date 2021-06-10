@@ -12,6 +12,7 @@ import (
 	"github.com/bradfitz/gomemcache/memcache"
 	go_ketama "github.com/dgryski/go-ketama"
 	"github.com/imega/gomemcache-selector/dgryski"
+	"github.com/imega/gomemcache-selector/ngerakines"
 	goketama "github.com/rckclmbr/goketama/ketama"
 )
 
@@ -415,6 +416,25 @@ func TestServerList_PickServer(t *testing.T) {
 				}
 
 				continuum := dgryski.NewWithHash(buckets, go_ketama.HashFunc2)
+
+				return continuum, nil
+			},
+		},
+		{
+			name: "github.com/ngerakines/ketama",
+			fn: func() (memcache.ServerSelector, error) {
+				var servers []goketama.ServerInfo
+				for _, v := range memcacheHosts {
+					addr, err := goketama.ServerAddr(v.Host)
+					if err != nil {
+						return nil, err
+					}
+					servers = append(servers, goketama.ServerInfo{
+						Addr:   addr,
+						Memory: uint64(v.Weight),
+					})
+				}
+				continuum := ngerakines.New(servers, 100)
 
 				return continuum, nil
 			},

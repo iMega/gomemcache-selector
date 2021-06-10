@@ -1,42 +1,34 @@
-package dgryski
+package ngerakines
 
 import (
 	"net"
 
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/dgryski/go-ketama"
+	"github.com/ngerakines/ketama"
+	goketama "github.com/rckclmbr/goketama/ketama"
 )
 
-func New(buckets []ketama.Bucket) memcache.ServerSelector {
-	sl := &ServerList{
-		Buckets: buckets,
+func New(servers []goketama.ServerInfo, spots int) memcache.ServerSelector {
+	hr := ketama.NewRing(spots)
+
+	for _, v := range servers {
+		hr.Add(v.Addr.String(), int(v.Memory))
 	}
 
-	return sl
-}
+	hr.Bake()
 
-func NewWithHash(buckets []ketama.Bucket, fn ketama.HashFunc) memcache.ServerSelector {
-	sl := &ServerList{
-		Buckets:  buckets,
-		HashFunc: fn,
-	}
+	sl := &ServerList{Ring: hr}
 
 	return sl
 }
 
 // ServerList is a simple ServerSelector. Its zero value is usable.
 type ServerList struct {
-	Buckets  []ketama.Bucket
-	HashFunc ketama.HashFunc
+	Ring ketama.HashRing
 }
 
 func (sl *ServerList) PickServer(key string) (net.Addr, error) {
-	c, err := ketama.NewWithHash(sl.Buckets, sl.HashFunc)
-	if err != nil {
-		return nil, err
-	}
-
-	server := c.Hash(key)
+	server := sl.Ring.Hash(key)
 
 	tcpaddr, err := net.ResolveTCPAddr("tcp", server)
 	if err != nil {
