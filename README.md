@@ -3,6 +3,31 @@
 -   [Memcache consistent hash portable for Go](https://github.com/iMega/gomemcache-selector/blob/main/php-memcache/selector.go)
 -   [Memcache consistent hash](https://github.com/php/pecl-caching-memcache/blob/master/memcache_consistent_hash.c)
 
+## Using
+
+```
+$ go get github.com/imega/gomemcache-selector/php-memcache
+```
+
+## Example
+
+```
+import (
+        "github.com/bradfitz/gomemcache/memcache"
+        "github.com/imega/gomemcache-selector/php-memcache"
+)
+
+func main() {
+    selector := phpmemcache.New("10.0.0.1:11211", "10.0.0.2:11211", "10.0.0.3:11212")
+    mc := memcache.NewFromSelector(selector)
+
+    mc.Set(&memcache.Item{Key: "foo", Value: []byte("my value")})
+
+    it, err := mc.Get("foo")
+    ...
+}
+```
+
 ## Reference
 
 -   [Simple hash memcache client](https://github.com/bradfitz/gomemcache)
