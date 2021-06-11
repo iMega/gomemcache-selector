@@ -1,5 +1,8 @@
 # gomemcache selectors
 
+-   [Memcache consistent hash portable for Go](https://github.com/iMega/gomemcache-selector/blob/main/php-memcache/selector.go)
+-   [Memcache consistent hash](https://github.com/php/pecl-caching-memcache/blob/master/memcache_consistent_hash.c)
+
 ## Reference
 
 -   [Simple hash memcache client](https://github.com/bradfitz/gomemcache)
