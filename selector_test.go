@@ -13,6 +13,7 @@ import (
 	go_ketama "github.com/dgryski/go-ketama"
 	"github.com/imega/gomemcache-selector/dgryski"
 	"github.com/imega/gomemcache-selector/ngerakines"
+	phpmemcache "github.com/imega/gomemcache-selector/php-memcache"
 	goketama "github.com/rckclmbr/goketama/ketama"
 )
 
@@ -367,25 +368,6 @@ func TestServerList_PickServer(t *testing.T) {
 				return continuum, nil
 			},
 		},
-		// {
-		// 	name: "github.com/liyinhgqw/memcache_client",
-		// 	fn: func() (memcache.ServerSelector, error) {
-		// 		sl := &memcache_client.ServerList{}
-
-		// 		var servers []string
-		// 		for _, v := range memcacheHosts {
-		// 			servers = append(servers, v.Host)
-		// 		}
-
-		// 		if err := sl.SetServers(servers...); err != nil {
-		// 			return nil, err
-		// 		}
-
-		// 		// sl.(memcache.ServerSelector)
-
-		// 		return sl.(memcache.ServerSelector), nil
-		// 	},
-		// },
 		{
 			name: "github.com/dgryski/go-ketama",
 			fn: func() (memcache.ServerSelector, error) {
@@ -435,6 +417,21 @@ func TestServerList_PickServer(t *testing.T) {
 					})
 				}
 				continuum := ngerakines.New(servers, 100)
+
+				return continuum, nil
+			},
+		},
+		{
+			name: "extension php memcache",
+			fn: func() (memcache.ServerSelector, error) {
+				var servers []string
+				for _, v := range memcacheHosts {
+					servers = append(servers, v.Host)
+				}
+				continuum, err := phpmemcache.New(servers...)
+				if err != nil {
+					t.Errorf("extension php memcache error = %v", err)
+				}
 
 				return continuum, nil
 			},
