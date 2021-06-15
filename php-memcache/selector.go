@@ -34,10 +34,12 @@ const (
 	consistentBuckets uint32 = 1024
 )
 
+// ServerList is a virtual bucket ring
 type ServerList struct {
 	Buckets []*bucket
 }
 
+// PickServer returns the server address
 func (sl *ServerList) PickServer(key string) (net.Addr, error) {
 	hashKey := hash(key)
 
@@ -56,6 +58,8 @@ type bucket struct {
 	Point uint32
 }
 
+// New Continum for the given servers.
+// Should be "ip:port".
 func New(servers ...string) (memcache.ServerSelector, error) {
 	sort.Strings(servers)
 
