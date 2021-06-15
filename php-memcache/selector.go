@@ -14,6 +14,7 @@
 
 // Memcache consistent hash portable for Go
 // see: memcache_consistent_hash.c
+// https://github.com/php/pecl-caching-memcache/blob/master/memcache_consistent_hash.c
 //
 package phpmemcache
 
